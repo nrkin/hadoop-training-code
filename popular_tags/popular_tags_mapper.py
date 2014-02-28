@@ -1,25 +1,20 @@
 #!/usr/bin/python
 
 import sys
-import re
+import csv
 
 TAG = 2
 ID = 0
 TYPE = 5
 
-
-def remove_quotes(line):
-    return re.sub("\"", "", line)
-
-for line in sys.stdin:
-    parts = line.strip().split("\t")
-
+reader = csv.reader(sys.stdin, delimiter='\t')
+for parts in reader:
     if len(parts) <= TYPE:
         continue
 
-    post_id = remove_quotes(parts[ID])
-    tags_list = remove_quotes(parts[TAG])
-    node_type = remove_quotes(parts[TYPE])
+    post_id = parts[ID]
+    tags_list = parts[TAG]
+    node_type = parts[TYPE]
 
     if node_type != "question" or tags_list == "":
         continue

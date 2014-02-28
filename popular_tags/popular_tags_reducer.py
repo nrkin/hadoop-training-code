@@ -41,6 +41,8 @@ i = 0
 while n_distinct < 10:
     print top_ten[i]
     i += 1
+    if len(top_ten) == i:
+        break
     if top_ten[i][1] != top_ten[i-1][1]:
         n_distinct += 1
 
