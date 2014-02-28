@@ -2,6 +2,7 @@
 
 import sys
 import re
+import csv
 
 #from mapper we will output the id, abs_parent_id, length
 #we will output only questions and answers. For questions, abs_parent_id will be empty. For anwers and comments on questions abs_parent_id == parent_id.
@@ -16,25 +17,21 @@ NODE_TYPE = 5
 #a post-id will be either single digit between [1 to 9], followed by 0 or more digits from [0 to 9]
 id_regexp = r"[1-9][0-9]*"
 
-def remove_quotes(line):
-    return line[1:-1]
-
 def is_id(word):
     if re.match(id_regexp, word):
         return True
     return False
 
-for line in sys.stdin:
-    parts = line.strip().split("\t")
-
+reader = csv.reader(sys.stdin, delimiter='\t')
+for parts in reader:
     if len(parts) < ABS_PARENT_ID:
         continue
 
-    post_id = remove_quotes(parts[ID])
-    body = remove_quotes(parts[BODY])
-    parent_id = remove_quotes(parts[PARENT_ID])
-    abs_parent_id = remove_quotes(parts[ABS_PARENT_ID])
-    node_type = remove_quotes(parts[NODE_TYPE])
+    post_id = parts[ID]
+    body = parts[BODY]
+    parent_id = parts[PARENT_ID]
+    abs_parent_id = parts[ABS_PARENT_ID]
+    node_type = parts[NODE_TYPE]
 
     #check if if it question or answer
     msg = ""
