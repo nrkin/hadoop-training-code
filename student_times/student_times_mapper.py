@@ -25,5 +25,5 @@ for words in reader:
         student_id = words[N_STUDENT_ID]
         added_at_hr = words[N_ADDED_AT]
         added_at_hr = get_hour(added_at_hr)
-        if added_at_hr:
+        if added_at_hr != None:
             print "{0}\t{1}".format(student_id, added_at_hr)
