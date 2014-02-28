@@ -39,3 +39,9 @@ for line in sys.stdin:
         highest = [(hour, count_dict[hour])]
     elif count_dict[hour] == highest[0][1]:
         highest.append((hour, count_dict[hour]))
+if old_id:
+    #print all the hours from highest for the the student id
+    for h in highest:
+        print "{0}\t{1}".format(old_id, h[0])
+    count_dict = {}
+    highest = [(-1, -1)]
