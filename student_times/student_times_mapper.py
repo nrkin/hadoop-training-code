@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 from datetime import datetime
-import re
+import csv
 
 N_ADDED_AT = 8
 N_STUDENT_ID = 3
@@ -19,14 +19,11 @@ def get_hour(d):
     except ValueError:
         return None
 
-def remove_quotes(word):
-    return re.sub("\"", "", word)
-
-for line in sys.stdin:
-    words = line.strip().split("\t")
+reader = csv.reader(sys.stdin, delimiter='\t')
+for words in reader:
     if len(words) >= N_ADDED_AT:
-        student_id = remove_quotes(words[N_STUDENT_ID])
-        added_at_hr = remove_quotes(words[N_ADDED_AT])
+        student_id = words[N_STUDENT_ID]
+        added_at_hr = words[N_ADDED_AT]
         added_at_hr = get_hour(added_at_hr)
         if added_at_hr:
             print "{0}\t{1}".format(student_id, added_at_hr)
