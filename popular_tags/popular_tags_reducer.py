@@ -34,6 +34,8 @@ for line in sys.stdin:
     n_tag += 1
     tag = current_tag
 
+if tag:
+    insert_into_top_ten(tag, n_tag)
 #print top_ten
 #print out the top ten
 n_distinct = 0
